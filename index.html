@@ -1133,32 +1133,40 @@
         </div>
 
         <style>
-            @media (max-width: 768px) {
-                /* บังคับแสดงการ์ด */
-                .process-card-mobile-fix {
-                    opacity: 1 !important;
-                    transform: none !important;
-                    visibility: visible !important;
-                    overflow: visible !important; /* ปิดการซ่อนส่วนเกินชั่วคราว */
-                }
+    @media (max-width: 768px) {
+        /* 1. บังคับแสดงผลการ์ด */
+        .process-card-mobile-fix {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+            
+            /* 2. เอา overflow: visible ออก แล้วใช้ hidden เพื่อตัดขอบมน */
+            overflow: hidden !important;
+            
+            /* 3. เพิ่มคำสั่งนี้เพื่อแก้บั๊ก Safari ให้ตัดขอบมนได้ แม้จะมี 3D Transform */
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            mask-image: radial-gradient(white, black);
+            
+            /* ย้ำความมน */
+            border-radius: 1rem !important; /* ค่าเดียวกับ rounded-2xl */
+        }
 
-                /* จัดการรูปภาพ */
-                .process-card-mobile-fix .card-image-layer {
-                    transform: translateZ(0); 
-                    will-change: transform;
-                    z-index: 1; /* อยู่ชั้นล่าง */
-                }
+        /* จัดการรูปภาพ */
+        .process-card-mobile-fix .card-image-layer {
+            transform: translateZ(0); 
+            will-change: transform;
+            z-index: 1;
+        }
 
-                /* จัดการข้อความ (ดึงมาข้างหน้าสุด) */
-                .process-card-mobile-fix .card-text-layer {
-                    position: relative;
-                    z-index: 99 !important; /* บังคับอยู่บนสุด */
-                    transform: translateZ(10px) !important; /* ดึงออกมาในแกน 3D */
-                    opacity: 1 !important;
-                    background-color: rgba(2, 11, 22, 0.9) !important; /* พื้นหลังเข้มขึ้นกันจม */
-                }
-            }
-        </style>
+        /* จัดการข้อความ */
+        .process-card-mobile-fix .card-text-layer {
+            position: relative;
+            z-index: 20; /* ไม่ต้องใช้ 99 ก็ได้ถ้ามี mask-image */
+            transform: translateZ(0); /* แค่กระตุ้น GPU ไม่ต้องดึงออกมา 10px แล้ว */
+            background-color: rgba(2, 11, 22, 0.95); /* พื้นหลังเข้มขึ้นอีกนิดเพื่อความชัด */
+        }
+    }
+</style>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
@@ -1983,6 +1991,7 @@
 </body>
 
 </html>
+
 
 
 
