@@ -1134,16 +1134,21 @@
 
         <style>
             @media (max-width: 768px) {
-                /* บังคับแสดงผลการ์ดทันทีบนมือถือ ไม่ต้องรอ AOS Animation */
                 .process-card-mobile-fix {
                     opacity: 1 !important;
                     transform: none !important;
                     visibility: visible !important;
                 }
-                /* แก้บั๊กรูปหายด้วยการบังคับ Hardware Acceleration */
-                .process-card-mobile-fix img {
+                /* แก้บั๊กรูปหาย */
+                .process-card-mobile-fix .card-image-layer {
                     transform: translateZ(0); 
                     will-change: transform;
+                }
+                /* แก้บั๊กข้อความหาย (สำคัญมาก) */
+                .process-card-mobile-fix .card-text-layer {
+                    transform: translateZ(0); 
+                    position: relative;
+                    z-index: 50;
                 }
             }
         </style>
@@ -1153,89 +1158,78 @@
             <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
                 data-aos="fade-up" data-aos-delay="0">
                 
-                <div class="relative h-48 w-full z-10">
-                    <img src="f1.png" alt="Fishing Port"
+                <div class="card-image-layer relative h-48 w-full z-0">
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1170&auto=format&fit=crop" 
+                        alt="Fishing Port"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
-                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none"></div>
                     
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-10">
                         <span class="text-white font-bold text-lg font-mono">01</span>
                     </div>
                 </div>
-                <div class="p-6 flex-1 relative z-20">
-                    <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Strategic
-                        Sourcing</h3>
+
+                <div class="card-text-layer p-6 flex-1 relative z-20 bg-[#020b16]/30"> <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Strategic Sourcing</h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Selecting globally certified fisheries and farms (MSC/ASC) from Japan, Taiwan, and
-                        Vietnam.
+                        Selecting globally certified fisheries and farms (MSC/ASC) from Japan, Taiwan, and Vietnam.
                     </p>
                 </div>
             </div>
 
             <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
                 data-aos="fade-up" data-aos-delay="150">
-                <div class="relative h-48 w-full z-10">
+                <div class="card-image-layer relative h-48 w-full z-0">
                     <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1170&auto=format&fit=crop"
                         alt="Quality Control"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
-                    </div>
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none"></div>
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-10">
                         <span class="text-white font-bold text-lg font-mono">02</span>
                     </div>
                 </div>
-                <div class="p-6 flex-1 relative z-20">
-                    <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Quality
-                        Inspection</h3>
+                <div class="card-text-layer p-6 flex-1 relative z-20 bg-[#020b16]/30">
+                    <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Quality Inspection</h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Expert teams inspect freshness, texture, and safety standards before loading onto
-                        containers.
+                        Expert teams inspect freshness, texture, and safety standards before loading onto containers.
                     </p>
                 </div>
             </div>
 
             <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
                 data-aos="fade-up" data-aos-delay="300">
-                <div class="relative h-48 w-full z-10">
+                <div class="card-image-layer relative h-48 w-full z-0">
                     <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
                         alt="Cold Chain Logistics"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
-                    </div>
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none"></div>
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-10">
                         <span class="text-white font-bold text-lg font-mono">03</span>
                     </div>
                 </div>
-                <div class="p-6 flex-1 relative z-20">
-                    <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Cold Chain
-                        Logistics</h3>
+                <div class="card-text-layer p-6 flex-1 relative z-20 bg-[#020b16]/30">
+                    <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Cold Chain Logistics</h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Transported via advanced cold chain systems maintaining temperatures between -20°C to
-                        -60°C.
+                        Transported via advanced cold chain systems maintaining temperatures between -20°C to -60°C.
                     </p>
                 </div>
             </div>
 
             <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
                 data-aos="fade-up" data-aos-delay="450">
-                <div class="relative h-48 w-full z-10">
+                <div class="card-image-layer relative h-48 w-full z-0">
                     <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?q=80&w=1171&auto=format&fit=crop"
                         alt="Factory Delivery"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
-                    </div>
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none"></div>
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-10">
                         <span class="text-white font-bold text-lg font-mono">04</span>
                     </div>
                 </div>
-                <div class="p-6 flex-1 relative z-20">
-                    <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Factory
-                        Delivery</h3>
+                <div class="card-text-layer p-6 flex-1 relative z-20 bg-[#020b16]/30">
+                    <h3 class="text-xl font-bold text-ocean-accent mb-3 uppercase tracking-wide">Factory Delivery</h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Delivered directly to your facility with complete documentation, ready for immediate
-                        production.
+                        Delivered directly to your facility with complete documentation, ready for immediate production.
                     </p>
                 </div>
             </div>
@@ -1983,6 +1977,7 @@
 </body>
 
 </html>
+
 
 
 
