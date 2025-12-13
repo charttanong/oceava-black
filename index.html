@@ -1116,9 +1116,9 @@
 
 
 
-        <section class="relative h-auto py-16 md:py-20 overflow-hidden bg-[#020b16]">
+        <section class="relative h-auto py-16 md:py-20 overflow-hidden bg-[#020b16]" style="isolation: isolate;">
 
-    <canvas id="bgCanvas" class="absolute inset-0 z-0"></canvas>
+    <canvas id="bgCanvas" class="absolute inset-0 z-[-1] pointer-events-none"></canvas>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-center">
 
@@ -1132,21 +1132,35 @@
             <div class="w-24 h-1 bg-ocean-accent mx-auto mt-6 rounded-full"></div>
         </div>
 
+        <style>
+            @media (max-width: 768px) {
+                /* บังคับแสดงผลการ์ดทันทีบนมือถือ ไม่ต้องรอ AOS Animation */
+                .process-card-mobile-fix {
+                    opacity: 1 !important;
+                    transform: none !important;
+                    visibility: visible !important;
+                }
+                /* แก้บั๊กรูปหายด้วยการบังคับ Hardware Acceleration */
+                .process-card-mobile-fix img {
+                    transform: translateZ(0); 
+                    will-change: transform;
+                }
+            }
+        </style>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-            <div class="process-card !p-0 overflow-hidden group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]"
-                data-aos="fade-up" data-aos-delay="0" data-aos-offset="50"
-                style="-webkit-mask-image: -webkit-radial-gradient(white, black);">
+            <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
+                data-aos="fade-up" data-aos-delay="0">
                 
-                <div class="relative h-48 w-full overflow-hidden z-10">
-                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1170&auto=format&fit=crop" 
-                        alt="Fishing Port"
-                        class="relative z-20 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="relative h-48 w-full z-10">
+                    <img src="f1.png" alt="Fishing Port"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 z-30">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
                     </div>
                     
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-40">
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
                         <span class="text-white font-bold text-lg font-mono">01</span>
                     </div>
                 </div>
@@ -1160,19 +1174,15 @@
                 </div>
             </div>
 
-            <div class="process-card !p-0 overflow-hidden group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]"
-                data-aos="fade-up" data-aos-delay="150" data-aos-offset="50"
-                style="-webkit-mask-image: -webkit-radial-gradient(white, black);">
-                
-                <div class="relative h-48 w-full overflow-hidden z-10">
+            <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
+                data-aos="fade-up" data-aos-delay="150">
+                <div class="relative h-48 w-full z-10">
                     <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1170&auto=format&fit=crop"
                         alt="Quality Control"
-                        class="relative z-20 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 z-30">
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
                     </div>
-                    
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-40">
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
                         <span class="text-white font-bold text-lg font-mono">02</span>
                     </div>
                 </div>
@@ -1186,19 +1196,15 @@
                 </div>
             </div>
 
-            <div class="process-card !p-0 overflow-hidden group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]"
-                data-aos="fade-up" data-aos-delay="300" data-aos-offset="50"
-                style="-webkit-mask-image: -webkit-radial-gradient(white, black);">
-                
-                <div class="relative h-48 w-full overflow-hidden z-10">
+            <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
+                data-aos="fade-up" data-aos-delay="300">
+                <div class="relative h-48 w-full z-10">
                     <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
                         alt="Cold Chain Logistics"
-                        class="relative z-20 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 z-30">
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
                     </div>
-                    
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-40">
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
                         <span class="text-white font-bold text-lg font-mono">03</span>
                     </div>
                 </div>
@@ -1212,19 +1218,15 @@
                 </div>
             </div>
 
-            <div class="process-card !p-0 overflow-hidden group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]"
-                data-aos="fade-up" data-aos-delay="450" data-aos-offset="50"
-                style="-webkit-mask-image: -webkit-radial-gradient(white, black);">
-                
-                <div class="relative h-48 w-full overflow-hidden z-10">
+            <div class="process-card process-card-mobile-fix !p-0 group flex flex-col h-full bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-ocean-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
+                data-aos="fade-up" data-aos-delay="450">
+                <div class="relative h-48 w-full z-10">
                     <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?q=80&w=1171&auto=format&fit=crop"
                         alt="Factory Delivery"
-                        class="relative z-20 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 z-30">
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020b16] to-transparent opacity-80 pointer-events-none">
                     </div>
-                    
-                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center z-40">
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-ocean-accent/20 backdrop-blur-md border border-ocean-accent flex items-center justify-center">
                         <span class="text-white font-bold text-lg font-mono">04</span>
                     </div>
                 </div>
@@ -1981,6 +1983,7 @@
 </body>
 
 </html>
+
 
 
 
