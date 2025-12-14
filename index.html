@@ -1133,44 +1133,32 @@
         </div>
 
         <style>
-    @media (max-width: 768px) {
-        /* จัดการตัวการ์ดแม่ (Parent) */
-        .process-card-mobile-fix {
-            /* 1. บังคับแสดงผล */
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: none !important; /* ล้าง Animation ของ AOS */
+            @media (max-width: 768px) {
+                /* บังคับแสดงการ์ด */
+                .process-card-mobile-fix {
+                    opacity: 1 !important;
+                    transform: none !important;
+                    visibility: visible !important;
+                    overflow: visible !important; /* ปิดการซ่อนส่วนเกินชั่วคราว */
+                }
 
-            /* 2. บังคับตัดขอบมน */
-            border-radius: 1rem !important; 
-            overflow: hidden !important;
+                /* จัดการรูปภาพ */
+                .process-card-mobile-fix .card-image-layer {
+                    transform: translateZ(0); 
+                    will-change: transform;
+                    z-index: 1; /* อยู่ชั้นล่าง */
+                }
 
-            /* 3. 🔥 MAGIC FIX: คำสั่งนี้จะบังคับให้ Safari/Chrome ตัดขอบ Child Elements ที่มี Z-index ได้ถูกต้อง */
-            -webkit-transform: perspective(1px) translateZ(0);
-            transform: perspective(1px) translateZ(0);
-            
-            /* 4. ป้องกันการกระพริบ */
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-
-        /* จัดการรูปภาพ (อยู่ชั้นล่าง) */
-        .process-card-mobile-fix .card-image-layer {
-            position: relative;
-            z-index: 1; 
-            /* ลบ transform 3D ออกจากลูก เพื่อให้ Parent จัดการตัดขอบเอง */
-            transform: none !important; 
-        }
-
-        /* จัดการข้อความ (อยู่ชั้นบน) */
-        .process-card-mobile-fix .card-text-layer {
-            position: relative;
-            z-index: 10; /* อยู่เหนือรูปแน่นอน */
-            background-color: rgba(2, 11, 22, 0.95); /* พื้นหลังทึบให้อ่านง่าย */
-            transform: none !important; /* ลบ 3D ออกเพื่อไม่ให้ทะลุ Mask */
-        }
-    }
-</style>
+                /* จัดการข้อความ (ดึงมาข้างหน้าสุด) */
+                .process-card-mobile-fix .card-text-layer {
+                    position: relative;
+                    z-index: 99 !important; /* บังคับอยู่บนสุด */
+                    transform: translateZ(10px) !important; /* ดึงออกมาในแกน 3D */
+                    opacity: 1 !important;
+                    background-color: rgba(2, 11, 22, 0.9) !important; /* พื้นหลังเข้มขึ้นกันจม */
+                }
+            }
+        </style>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
@@ -1995,6 +1983,7 @@
 </body>
 
 </html>
+
 
 
 
