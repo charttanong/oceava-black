@@ -1134,36 +1134,40 @@
 
         <style>
     @media (max-width: 768px) {
-        /* 1. บังคับแสดงผลการ์ด */
+        /* จัดการตัวการ์ดแม่ (Parent) */
         .process-card-mobile-fix {
+            /* 1. บังคับแสดงผล */
             opacity: 1 !important;
-            transform: none !important;
             visibility: visible !important;
-            
-            /* 2. เอา overflow: visible ออก แล้วใช้ hidden เพื่อตัดขอบมน */
+            transform: none !important; /* ล้าง Animation ของ AOS */
+
+            /* 2. บังคับตัดขอบมน */
+            border-radius: 1rem !important; 
             overflow: hidden !important;
+
+            /* 3. 🔥 MAGIC FIX: คำสั่งนี้จะบังคับให้ Safari/Chrome ตัดขอบ Child Elements ที่มี Z-index ได้ถูกต้อง */
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
             
-            /* 3. เพิ่มคำสั่งนี้เพื่อแก้บั๊ก Safari ให้ตัดขอบมนได้ แม้จะมี 3D Transform */
-            -webkit-mask-image: -webkit-radial-gradient(white, black);
-            mask-image: radial-gradient(white, black);
-            
-            /* ย้ำความมน */
-            border-radius: 1rem !important; /* ค่าเดียวกับ rounded-2xl */
+            /* 4. ป้องกันการกระพริบ */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
-        /* จัดการรูปภาพ */
+        /* จัดการรูปภาพ (อยู่ชั้นล่าง) */
         .process-card-mobile-fix .card-image-layer {
-            transform: translateZ(0); 
-            will-change: transform;
-            z-index: 1;
+            position: relative;
+            z-index: 1; 
+            /* ลบ transform 3D ออกจากลูก เพื่อให้ Parent จัดการตัดขอบเอง */
+            transform: none !important; 
         }
 
-        /* จัดการข้อความ */
+        /* จัดการข้อความ (อยู่ชั้นบน) */
         .process-card-mobile-fix .card-text-layer {
             position: relative;
-            z-index: 20; /* ไม่ต้องใช้ 99 ก็ได้ถ้ามี mask-image */
-            transform: translateZ(0); /* แค่กระตุ้น GPU ไม่ต้องดึงออกมา 10px แล้ว */
-            background-color: rgba(2, 11, 22, 0.95); /* พื้นหลังเข้มขึ้นอีกนิดเพื่อความชัด */
+            z-index: 10; /* อยู่เหนือรูปแน่นอน */
+            background-color: rgba(2, 11, 22, 0.95); /* พื้นหลังทึบให้อ่านง่าย */
+            transform: none !important; /* ลบ 3D ออกเพื่อไม่ให้ทะลุ Mask */
         }
     }
 </style>
@@ -1991,6 +1995,7 @@
 </body>
 
 </html>
+
 
 
 
